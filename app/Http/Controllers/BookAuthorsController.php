@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BookAuthor;
 use Illuminate\Http\Request;
 
-class BookAuthorController extends Controller
+class BookAuthorsController extends Controller
 {
     /**
      * Display a listing of the resource.
