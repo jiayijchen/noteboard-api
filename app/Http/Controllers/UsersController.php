@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UsersResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -36,15 +38,19 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        // $faker = \Faker\Factory::create(1);
+        $faker = \Faker\Factory::create(1);
 
-        // $user = User::create([
-        //     'name' => $faker->name,
-        //     'description' => $faker->sentence,
-        //     'publication_year' => $faker->year
-        // ]);
+        $user = User::create([
+            'user_name' => $faker->userName,
+            'email' => $faker->safeEmail,
+            'email_verified_at' => now(),
+            'password' => $faker->password,
+            'first_name' => $faker->firstName,
+            'last_name' => $faker->lastName,
+            'remember_token' => Str::random(10),
+        ]);
 
-        // return new UsersResource($user);
+        return new UsersResource($user);
     }
 
     /**
@@ -78,11 +84,13 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // $user->update([
-        //     'name' => $request->input('name'),
-        //     'description' => $request->input('description'),
-        //     'publication_year' => $request->input('publication_year'),
-        // ]);
+        $user->update([
+            'user_name' => $request->input('user_name'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+        ]);
 
         return new UsersResource($user);
     }
