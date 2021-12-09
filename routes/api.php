@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthorsController;
 use App\Http\Controllers\BooksController;
-
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +22,8 @@ Route::middleware('auth:api')->prefix('v1')->group(function() {
         return $request->user();
     });
 
-    Route::apiResource('/authors', AuthorsController::class);
-    Route::apiResource('/books', BooksController::class);
+    Route::apiResource('/users', UsersController::class);
+    Route::get('/logout', [UsersController::class, 'logout']);
 });
 
 //author/{author}
