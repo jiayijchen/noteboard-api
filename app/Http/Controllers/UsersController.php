@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\UserResource;
 
+
 class UsersController extends Controller
 {
     /**
@@ -92,7 +93,7 @@ class UsersController extends Controller
             'password' => $faker->password,
             'first_name' => $faker->firstName,
             'last_name' => $faker->lastName,
-            'remember_token' => Str::random(10),
+            // 'remember_token' => Str::random(10)
         ]);
 
         return new UsersResource($user);
