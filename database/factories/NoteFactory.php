@@ -14,8 +14,9 @@ class NoteFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->words($nb = 3),
-            'content' => $this->faker->realText()
+            'title' => $this->faker->catchPhrase,
+            'content' => $this->faker->realText,
+            'public' => false
         ];
     }
 }
