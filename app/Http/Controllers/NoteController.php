@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreNoteRequest;
-use App\Http\Requests\UpdateNoteRequest;
+use App\Http\Resources\NoteResource;
 use App\Models\Note;
+use Illuminate\Http\Request;
+
 
 class NoteController extends Controller
 {
@@ -15,7 +16,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
+        return NoteResource::collection(Note::all());
     }
 
     /**
@@ -31,10 +32,10 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreNoteRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNoteRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -64,13 +65,18 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateNoteRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNoteRequest $request, Note $note)
+    public function update(Request $request, Note $note)
     {
-        //
+        $note->update([
+            'title' => $request->input('title'),
+            'content' => $request->input('content')
+        ]);
+
+        return new NoteResource($note);
     }
 
     /**
@@ -81,6 +87,8 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
-        //
+        $note->delete();
+
+        return response(null, 204);
     }
 }

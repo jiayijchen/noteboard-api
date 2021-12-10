@@ -15,6 +15,7 @@ class NoteFactory extends Factory
     {
         return [
             'title' => $this->faker->words($nb = 3),
+            'content' => $this->faker->realText()
         ];
     }
 }
