@@ -22,7 +22,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function() {
         return $request->user();
     });
 
-    Route::apiResource('/users', UsersController::class);
+    // Route::apiResource('/users', UsersController::class);
     Route::get('/logout', [UsersController::class, 'logout']);
 });
 
