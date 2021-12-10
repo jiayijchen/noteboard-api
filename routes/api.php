@@ -26,5 +26,4 @@ Route::middleware('auth:api')->prefix('v1')->group(function() {
     Route::get('/logout', [UsersController::class, 'logout']);
 });
 
-//author/{author}
-// For one specific author
+Route::post('/register', [UsersController::class, 'register']);
