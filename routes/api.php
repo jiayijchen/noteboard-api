@@ -23,6 +23,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function() {
     });
 
     Route::apiResource('/users', UsersController::class);
-    Route::apiResource('/authors', AuthorsController::class);
-    Route::apiResource('/books', BooksController::class);
+    Route::get('/logout', [UsersController::class, 'logout']);
 });
+
+Route::post('/register', [UsersController::class, 'register']);
