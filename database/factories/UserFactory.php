@@ -18,10 +18,12 @@ class UserFactory extends Factory
         $hashedPassword = Hash::make('changeme');
 
         return [
-            'name' => $this->faker->name(),
+            'user_name' => $this->faker->unique()->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => $hashedPassword, // password
+            // 'first_name' => $this->faker->firstName(),
+            // 'last_name' => $this->faker->lastName(),
             'remember_token' => Str::random(10),
         ];
     }
