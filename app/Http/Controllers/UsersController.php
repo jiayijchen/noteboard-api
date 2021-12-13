@@ -64,7 +64,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return UsersResource::collection(User::all());
+        return UserResource::collection(User::all());
     }
 
     /**
@@ -95,7 +95,7 @@ class UsersController extends Controller
             // 'remember_token' => Str::random(10)
         ]);
 
-        return new UsersResource($user);
+        return new UserResource($user);
     }
 
     /**
@@ -106,7 +106,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        return new UsersResource($user);
+        return new UserResource($user);
     }
 
     /**
@@ -135,7 +135,7 @@ class UsersController extends Controller
             'password' => $request->input('password')
         ]);
 
-        return new UsersResource($user);
+        return new UserResource($user);
     }
 
     /**

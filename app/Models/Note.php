@@ -9,7 +9,12 @@ class Note extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content'];
+    protected $fillable = ['title', 'content', 'public'];
 
-
+    // what you don't want to show the user
+    protected $hidden = [
+        'laravel_through_key',
+        'created_at',
+        'updated_at'
+    ];
 }

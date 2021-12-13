@@ -41,7 +41,8 @@ class NoteController extends Controller
 
         $note = Note::create([
             'title' => $faker->catchPhrase,
-            'content' => $faker->realText
+            'content' => $faker->realText,
+            'public' => false
         ]);
 
         return new NoteResource($note);
@@ -55,7 +56,7 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        //
+        return new NoteResource($note);
     }
 
     /**
@@ -80,7 +81,8 @@ class NoteController extends Controller
     {
         $note->update([
             'title' => $request->input('title'),
-            'content' => $request->input('content')
+            'content' => $request->input('content'),
+            'public'=> $request->input('public')
         ]);
 
         return new NoteResource($note);

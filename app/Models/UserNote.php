@@ -9,5 +9,5 @@ class UserNote extends Model
 {
     use HasFactory;
 
-    protected $table = 'book_author';
+    protected $table = 'user_notes';
 }

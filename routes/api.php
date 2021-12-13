@@ -27,6 +27,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function() {
     Route::get('/logout', [UsersController::class, 'logout']);
 
     Route::apiResource('/notes', NoteController::class);
+    Route::apiResource('/users', UsersController::class);
 });
 
 Route::post('/register', [UsersController::class, 'register']);
