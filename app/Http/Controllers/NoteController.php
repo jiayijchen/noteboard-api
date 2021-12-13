@@ -37,7 +37,14 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $faker = \Faker\Factory::create(1);
+
+        $note = Note::create([
+            'title' => $faker->catchPhrase,
+            'content' => $faker->realText
+        ]);
+
+        return new NoteResource($note);
     }
 
     /**

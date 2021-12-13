@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\UserResource;
+use App\Http\Requests\UserRequest;
 
 
 class UsersController extends Controller
@@ -87,12 +88,10 @@ class UsersController extends Controller
         $faker = \Faker\Factory::create(1);
 
         $user = User::create([
-            'user_name' => $faker->userName,
+            'name' => $faker->name,
             'email' => $faker->safeEmail,
             'email_verified_at' => now(),
             'password' => $faker->password,
-            'first_name' => $faker->firstName,
-            'last_name' => $faker->lastName,
             // 'remember_token' => Str::random(10)
         ]);
 
@@ -128,14 +127,12 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         $user->update([
-            'user_name' => $request->input('user_name'),
+            'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => $request->input('password'),
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
+            'password' => $request->input('password')
         ]);
 
         return new UsersResource($user);

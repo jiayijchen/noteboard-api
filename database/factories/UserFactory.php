@@ -18,7 +18,7 @@ class UserFactory extends Factory
         $hashedPassword = Hash::make('changeme');
 
         return [
-            'user_name' => $this->faker->unique()->userName(),
+            'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => $hashedPassword, // password
