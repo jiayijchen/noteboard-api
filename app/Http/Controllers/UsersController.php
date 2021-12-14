@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UsersResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +28,7 @@ class UsersController extends Controller
     /**
      * Register a user
      */
-    public function register(Request $request) {
+    public function registers(Request $request) {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|max:64|unique:users,email',
@@ -55,6 +54,33 @@ class UsersController extends Controller
         // return response(['data' => $data, 'message' => 'Account created successfully!', 'status' => true]);
         return new UserResource($data);
 
+    }
+
+    public function register(Request $request)
+    {
+      $validator = Validator::make($request->all(), [
+        'name' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'required'
+      ]);
+      if ($validator->fails()) {
+        return response()->json([
+          'success' => false,
+          'message' => $validator->errors(),
+        ], 401);
+      }
+      $input = $request->all();
+      $input['password']=bcrypt($input['password']);
+      $user = User::create($input);
+      $token = $user->createToken('appToken')->accessToken;
+      $createdAt = date("l jS \of F Y h:i:s A");
+
+      return response()->json([
+        'success' => true,
+        'token' => $token,
+        'user' => $user,
+        'created_at' => $createdAt
+      ]);
     }
 
     /**
